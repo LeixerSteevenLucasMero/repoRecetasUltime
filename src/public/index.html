@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pasatiempos</title>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <!-- animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="/main.css" />
+  </head>
+  <body>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="contenedor" style="text-align: center">
+      <div class="demo-content container login-container">
+        <div class="row mgAuto" style="padding: 200px">
+          <form id="noteForm" class="card card-body rounded-0">
+            <h1 class="h3 mb-5">Agregar Receta</h1>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingrese la Receta"
+              id="title"
+              name="message"
+              class="form-control"
+              autofocus
+            />
+
+            <textarea
+              style="padding-top: 10px; margin-top: 20px; margin-bottom: 20px; "
+              type="number"
+              class="form-control"
+              placeholder="Descripción"
+              id="description"
+              rows="2"
+            ></textarea>
+            <button class="btn btn-dark rounded-0" style="margin-left: 200px; margin-right: 200px;">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="contenedor" id="notes" style="padding-bottom: 10px; padding: 10px; text-align: center; text-size-adjust: 100px;"></div>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js" type="module"></script>
+    <script src="./js/extends.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body{
+        background-color: pink !important;
+      }
+      .app-receta {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .receta-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 20px;
+        margin-top: 20px;
+      }
+
+      .receta-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
+        text-align: center;
+      }
+
+      .receta-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
+      }
+
+      .receta-card h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .receta-card p {
+        margin-bottom: 10px;
+      }
+
+      .receta-card img {
+        max-width: 100%;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+    </style>
+  </body>
+</html>

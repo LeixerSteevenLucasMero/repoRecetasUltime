@@ -1,57 +1,57 @@
-import { deleteNote, getNoteById, saveNote, updateNote } from "./sockets.js";
+import { deleteReceta, getRecetaById, saveReceta, updateReceta } from "./sockets.js";
 
-const notesList = document.querySelector("#notes");
+const recetasList = document.querySelector("#recetas");
 const title = document.querySelector("#title");
 const description = document.querySelector("#description");
 
 let savedId = "";
 
-const noteUI = (note) => {
+const recetaUI = (receta) => {
   const div = document.createElement("div");
   div.innerHTML = `
   <div class="card card-body rounded-0 animate__animated animate__fadeInUp mb-2">
       <div class="d-flex justify-content-between">
-          <h1 class="card-title h3">${note.title}</h1>
+          <h1 class="card-title h3">${receta.title}</h1>
           <div>
-              <button class="btn btn-danger delete" data-id="${note._id}">delete</button>
-              <button class="btn btn-secondary update" data-id="${note._id}">update</button>
+              <button class="btn btn-danger delete" data-id="${receta._id}">delete</button>
+              <button class="btn btn-secondary update" data-id="${receta._id}">update</button>
           </div>
       </div>
-      <p>${note.description}</p>
+      <p>${receta.description}</p>
   </div>
 `;
   const btnDelete = div.querySelector(".delete");
   const btnUpdate = div.querySelector(".update");
 
-  btnDelete.addEventListener("click", () => deleteNote(btnDelete.dataset.id));
-  btnUpdate.addEventListener("click", () => getNoteById(btnDelete.dataset.id));
+  btnDelete.addEventListener("click", () => deleteReceta(btnDelete.dataset.id));
+  btnUpdate.addEventListener("click", () => getRecetaById(btnDelete.dataset.id));
 
   return div;
 };
 
-export const renderNotes = (notes) => {
+export const renderRecetas = (recetas) => {
   savedId = "";
-  notesList.innerHTML = "";
-  notes.forEach((note) => notesList.append(noteUI(note)));
+  recetasList.innerHTML = "";
+  recetas.forEach((receta) => recetasList.append(recetaUI(receta)));
 };
 
-export const appendNote = (note) => {
-  notesList.append(noteUI(note));
+export const appendReceta = (receta) => {
+  recetasList.append(recetaUI(receta));
 };
 
-export const fillForm = (note) => {
-  title.value = note.title;
-  description.value = note.description;
+export const fillForm = (receta) => {
+  title.value = receta.title;
+  description.value = receta.description;
 
-  savedId = note._id;
+  savedId = receta._id;
 };
 
 export const onHandleSubmit = (e) => {
   e.preventDefault();
   if (savedId) {
-    updateNote(savedId, title.value, description.value);
+    updateReceta(savedId, title.value, description.value);
   } else {
-    saveNote(title.value, description.value);
+    saveReceta(title.value, description.value);
   }
 
   title.value = "";

@@ -15,4 +15,4 @@ const schema = new Schema(
   }
 );
 
-export default model("Note", schema);
+export default model("Receta", schema);

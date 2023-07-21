@@ -1,4 +1,4 @@
-import Note from "./models/Note";
+import Receta from "./models/Receta";
 import User from "./microservices/auth/models/user";
 
 export default (io) => {
@@ -7,34 +7,34 @@ export default (io) => {
     console.log("nuevo cliente connectado:", socket.id);
 
     // Send all messages to the client
-    const emitNotes = async () => {
-      const notes = await Note.find();
-      socket.emit("server:loadnotes", notes);
+    const emitRecetas = async () => {
+      const recetas = await Receta.find();
+      socket.emit("server:loadrecetas", recetas);
     };3
-    emitNotes();
+    emitRecetas();
 
-    socket.on("client:newnote", async (data) => {
-      const newNote = new Note(data);
-      const savedNote = await newNote.save();
-      io.emit("server:newnote", savedNote);
+    socket.on("client:newreceta", async (data) => {
+      const newReceta = new Receta(data);
+      const savedReceta = await newReceta.save();
+      io.emit("server:newreceta", savedReceta);
     });
 
-    socket.on("client:deletenote", async (noteId) => {
-      await Note.findByIdAndDelete(noteId);
-      emitNotes();
+    socket.on("client:deletereceta", async (recetaId) => {
+      await Receta.findByIdAndDelete(recetaId);
+      emitRecetas();
     });
 
-    socket.on("client:getnote", async (noteId) => {
-      const note = await Note.findById(noteId);
-      socket.emit("server:selectednote", note);
+    socket.on("client:getreceta", async (recetaId) => {
+      const receta = await Receta.findById(recetaId);
+      socket.emit("server:selectedreceta", receta);
     });
 
-    socket.on("client:updatenote", async (updatedNote) => {
-      await Note.findByIdAndUpdate(updatedNote._id, {
-        title: updatedNote.title,
-        description: updatedNote.description,
+    socket.on("client:updatereceta", async (updatedReceta) => {
+      await Receta.findByIdAndUpdate(updatedReceta._id, {
+        title: updatedReceta.title,
+        description: updatedReceta.description,
       });
-      emitNotes();
+      emitRecetas();
     });
   });
 };

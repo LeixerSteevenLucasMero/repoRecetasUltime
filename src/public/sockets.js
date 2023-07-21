@@ -1,33 +1,33 @@
 const socket = io.connect();
 
 /**
- * create a new note
- * @param {string} title a title for a new note
- * @param {string} description a description for a new note
+ * create a new receta
+ * @param {string} title a title for a new receta
+ * @param {string} description a description for a new receta
  */
-export const saveNote = (title, description) => {
-  socket.emit("client:newnote", {
+export const saveReceta = (title, description) => {
+  socket.emit("client:newreceta", {
     title,
     description,
   });
 };
 
 /**
- * delete a note based on an Id
- * @param {string} id a note ID
+ * delete a receta based on an Id
+ * @param {string} id a receta ID
  */
-export const deleteNote = (id) => {
-  socket.emit("client:deletenote", id);
+export const deleteReceta = (id) => {
+  socket.emit("client:deletereceta", id);
 };
 
 /**
  *
- * @param {string} id note ID
- * @param {string} title note title
- * @param {string} description note description
+ * @param {string} id receta ID
+ * @param {string} title receta title
+ * @param {string} description receta description
  */
-export const updateNote = (_id, title, description) => {
-  socket.emit("client:updatenote", {
+export const updateReceta = (_id, title, description) => {
+  socket.emit("client:updatereceta", {
     _id,
     title,
     description,
@@ -35,21 +35,21 @@ export const updateNote = (_id, title, description) => {
 };
 
 /**
- * Load an Array of Notes
- * @param {function} callback A function to render Notes
+ * Load an Array of Recetas
+ * @param {function} callback A function to render Recetas
  */
-export const loadNotes = (callback) => {
-  socket.on("server:loadnotes", callback);
+export const loadRecetas = (callback) => {
+  socket.on("server:loadrecetas", callback);
 };
 
-export const onNewNote = (callback) => {
-  socket.on("server:newnote", callback);
+export const onNewReceta = (callback) => {
+  socket.on("server:newreceta", callback);
 };
 
 export const onSelected = (callback) => {
-  socket.on("server:selectednote", callback);
+  socket.on("server:selectedreceta", callback);
 };
 
-export const getNoteById = (noteId) => {
-  socket.emit("client:getnote", noteId);
+export const getRecetaById = (recetaId) => {
+  socket.emit("client:getreceta", recetaId);
 };
